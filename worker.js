@@ -4,19 +4,19 @@ export default {
     const path = url.pathname;
 
     // Cek status transaksi
-    if (path === '/status') {
-      const body = await request.json();
-      const params = new URLSearchParams({
-        ref_id: body.ref_id,
-        member_code: body.member_code,
-        signature: body.signature,
-      });
-      const res = await fetch(`https://api.tokovoucher.net/v1/transaksi/status?${params}`);
-      const data = await res.json();
-      return new Response(JSON.stringify(data), {
-        headers: { 'Content-Type': 'application/json' }
-      });
-    }
+   if (path === '/status') {
+  const body = await request.json();
+  const params = new URLSearchParams({
+    ref_id: body.ref_id,
+    member_code: body.member_code,
+    secret: body.secret,
+  });
+  const res = await fetch(`https://api.tokovoucher.net/v1/transaksi/status?${params}`);
+  const data = await res.json();
+  return new Response(JSON.stringify(data), {
+    headers: { 'Content-Type': 'application/json' }
+  });
+} 
 
     // Buat transaksi (default)
     if (request.method !== 'POST') {
